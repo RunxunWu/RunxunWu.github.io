@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -457,6 +457,11 @@
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6
+                </div>
+                
 
                 
 
@@ -495,7 +500,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://runxunwu.github.io/2020/05/27/My-first-blog-post/">http://runxunwu.github.io/2020/05/27/My-first-blog-post/</a>
+                    <a href="http://runxunwu.github.io/2020/05/27/my-first-blog-post/">http://runxunwu.github.io/2020/05/27/my-first-blog-post/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -682,6 +687,33 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'wurunxun@bupt.edu.cn',
+        clientSecret: 'Gx707601',
+        repo: 'RunxunWu.github.io',
+        owner: 'RunxunWu',
+        admin: ["RunxunWu"],
+        id: '2020-05-27T21-04-01',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
 
     
 
@@ -703,7 +735,7 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2020/05/27/My-first-blog-post/">
+                <a href="/2020/05/27/my-first-blog-post/">
                     <div class="card-image">
                         
                         
