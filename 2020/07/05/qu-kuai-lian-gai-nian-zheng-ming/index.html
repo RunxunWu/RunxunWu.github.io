@@ -458,7 +458,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    1.3k
                 </div>
                 
 
@@ -499,8 +499,8 @@
 
 block <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账十元'</span><span class="token punctuation">,</span><span class="token string">'123'</span><span class="token punctuation">)</span>
 block<span class="token punctuation">.</span>showBlock<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>如上图所示，定义了区块Block类用来储存三个数据，调用常用的sha256（secret hash algorithm）函数对账本数据和前区块的哈希值进行计算，定义了showBlock方法对区块内容进行输出。输出结果如下图：<br>    {‘data’: ‘转账十元’, ‘previousHash’: ‘123’, ‘hash’: ‘bbb52b503ca642e6c48f02ab793b2beaca4a5c5ce7e93531038ed65799f70010’}</p>
-<p>接下来是创建区块的链，定义链Chain类，并且要先定义一个祖先区块：<br>如下图</p>
+<p>如上图所示，定义了区块Block类用来储存三个数据，调用常用的sha256（secret hash algorithm）函数对账本数据和前区块的哈希值进行计算，定义了showBlock方法对区块内容进行输出。输出结果如下图：</p>
+<pre><code>{&#39;data&#39;: &#39;转账十元&#39;, &#39;previousHash&#39;: &#39;123&#39;, &#39;hash&#39;: &#39;bbb52b503ca642e6c48f02ab793b2beaca4a5c5ce7e93531038ed65799f70010&#39;}</code></pre><p>接下来是创建区块的链，定义链Chain类，并且要先定义一个祖先区块：<br>如下图</p>
 <pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#区块的 链</span>
 <span class="token comment" spellcheck="true">#生成祖先区块</span>
 <span class="token keyword">class</span> <span class="token class-name">Chain</span><span class="token punctuation">:</span>
@@ -518,8 +518,8 @@ block<span class="token punctuation">.</span>showBlock<span class="token punctua
 
 chain <span class="token operator">=</span> Chain<span class="token punctuation">(</span><span class="token punctuation">)</span>
 chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>输出结果如下：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}</p>
-<p>更进一步，定义添加区块的函数：</p>
+<p>输出结果如下：</p>
+<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}</code></pre><p>更进一步，定义添加区块的函数：</p>
 <pre class=" language-python"><code class="language-python">    @property
     <span class="token keyword">def</span> <span class="token function">getLatestBlock</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span>len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>chain<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span>
@@ -537,8 +537,9 @@ chain <span class="token operator">=</span> Chain<span class="token punctuation"
 block1 <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账十元'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span>
 chain<span class="token punctuation">.</span>addBlockToChain<span class="token punctuation">(</span>block1<span class="token punctuation">)</span>
 chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>输出结果：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}<br>    {‘data’: ‘转账十元’, ‘previousHash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’, ‘hash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’}</p>
-<p>然后我们就可以无限地添加区块了，但是还要有一个函数用来验证当前的区块链是否合法，我们通过验证区块的previousHash是否等于previous区块的hash来判断（顺便判断一下数据有没有被篡改）：</p>
+<p>输出结果：</p>
+<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}
+{&#39;data&#39;: &#39;转账十元&#39;, &#39;previousHash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;, &#39;hash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;}</code></pre><p>然后我们就可以无限地添加区块了，但是还要有一个函数用来验证当前的区块链是否合法，我们通过验证区块的previousHash是否等于previous区块的hash来判断（顺便判断一下数据有没有被篡改）：</p>
 <pre class=" language-python"><code class="language-python">    <span class="token comment" spellcheck="true">#验证当前的这个区块链是否合法</span>
     <span class="token comment" spellcheck="true">#当前的数据有没有被篡改</span>
     <span class="token comment" spellcheck="true">#我们要验证区块的previousHash是否等于previous区块的hash</span>
@@ -566,18 +567,29 @@ chain<span class="token punctuation">.</span>addBlockToChain<span class="token p
 chain<span class="token punctuation">.</span>addBlockToChain<span class="token punctuation">(</span>block2<span class="token punctuation">)</span>
 chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>chain<span class="token punctuation">.</span>validateChain<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
-<p>输出结果：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}<br>    {‘data’: ‘转账十元’, ‘previousHash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’, ‘hash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’}<br>    {‘data’: ‘转账二十元’, ‘previousHash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’, ‘hash’: ‘355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383’}<br>    True</p>
-<p>接下来尝试篡改区块链：</p>
+<p>输出结果：</p>
+<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}
+{&#39;data&#39;: &#39;转账十元&#39;, &#39;previousHash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;, &#39;hash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;}
+{&#39;data&#39;: &#39;转账二十元&#39;, &#39;previousHash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;, &#39;hash&#39;: &#39;355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383&#39;}
+True</code></pre><p>接下来尝试篡改区块链：</p>
 <pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 尝试篡改区块</span>
 chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token string">'转账500'</span> 
 chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>chain<span class="token punctuation">.</span>validateChain<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
-<p>输出结果：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}<br>    {‘data’: ‘转账500’, ‘previousHash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’, ‘hash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’}<br>    {‘data’: ‘转账二十元’, ‘previousHash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’, ‘hash’: ‘355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383’}<br>    数据被篡改<br>    False</p>
-<p>如果修正了哈希值呢？</p>
+<p>输出结果：</p>
+<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}
+{&#39;data&#39;: &#39;转账500&#39;, &#39;previousHash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;, &#39;hash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;}
+{&#39;data&#39;: &#39;转账二十元&#39;, &#39;previousHash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;, &#39;hash&#39;: &#39;355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383&#39;}
+数据被篡改
+False</code></pre><p>如果修正了哈希值呢？</p>
 <pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 尝试修正hash</span>
 chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>hash <span class="token operator">=</span> chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ComputeHash</code></pre>
-<p>输出结果：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}<br>    {‘data’: ‘转账500’, ‘previousHash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’, ‘hash’: ‘5a37b0e17c9f44a7f3676cdf137e1ae80d62d4bbc12505e62a8c2cde64a30644’}<br>    {‘data’: ‘转账二十元’, ‘previousHash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’, ‘hash’: ‘355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383’}<br>    前后区块链接断裂<br>    False</p>
-<p>综上所述，区块链确实拥有几乎不可篡改的特性。<br>以上就是一个最简易的python实现的“概念证明”的区块链程序。该程序当然还有许多的缺陷，如未加入工作量证明等区块链的机制，随着我对区块链技术了解的深入，我会进行迭代的更新，尽量去完善自己的这样一条区块链。</p>
+<p>输出结果：</p>
+<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}
+{&#39;data&#39;: &#39;转账500&#39;, &#39;previousHash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;, &#39;hash&#39;: &#39;5a37b0e17c9f44a7f3676cdf137e1ae80d62d4bbc12505e62a8c2cde64a30644&#39;}
+{&#39;data&#39;: &#39;转账二十元&#39;, &#39;previousHash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;, &#39;hash&#39;: &#39;355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383&#39;}
+前后区块链接断裂
+False</code></pre><p>综上所述，区块链确实拥有几乎不可篡改的特性。<br>以上就是一个最简易的python实现的“概念证明”的区块链程序。该程序当然还有许多的缺陷，如未加入工作量证明等区块链的机制，随着我对区块链技术了解的深入，我会进行迭代的更新，尽量去完善自己的这样一条区块链。</p>
 
             </div>
             <hr/>
