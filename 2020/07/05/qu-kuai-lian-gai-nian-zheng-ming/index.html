@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Runxun Wu の blog">
+    <meta name="keywords" content="区块链概念证明, Runxun Wu の blog">
     <meta name="description" content="欢迎光临吴润迅の博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Runxun Wu の blog</title>
+    <title>区块链概念证明 | Runxun Wu の blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -307,12 +307,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">区块链概念证明</h1>
                 </div>
             </div>
         </div>
@@ -449,7 +449,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-27
+                    2020-07-05
                 </div>
                 
 
@@ -458,7 +458,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    1.1k
                 </div>
                 
 
@@ -470,15 +470,114 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <p>区块链，顾名思义是一个个的区块组成的链条。每一个区块存储了三个数据，分别是账本数据、前一个区块的哈希值和自己的哈希值，哈希值相当于区块的指纹。而自己的哈希值由哈希函数对账本数据和前一个区块的哈希值进行计算得出。由此也可以看出，如果想要篡改账本数据，也会对该区块的哈希值作修改，前一个区块的哈希值修改后又会影响下一个区块的哈希值。所以要想更改一个区块的数据需要对该区块之后的一整条区块链进行修改。这使得想要修改数据成为了一件成本巨大，几乎不可能做到的事情。<br>下面使用python语言进行编程实现，对以上概念做实例证明：</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#区块链概念证明</span>
+
+<span class="token keyword">import</span> hashlib          <span class="token comment" spellcheck="true">#引入哈希模块</span>
+
+<span class="token keyword">def</span> <span class="token function">sha256</span><span class="token punctuation">(</span>dataNeedSha<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    sha256 <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    sha256<span class="token punctuation">.</span>update<span class="token punctuation">(</span>dataNeedSha<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> sha256<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 区块</span>
+<span class="token comment" spellcheck="true">#储存data</span>
+<span class="token comment" spellcheck="true">#之前区块的哈希值</span>
+<span class="token comment" spellcheck="true">#自己的哈希值: 由存储在区块里的信息计算出来的（data+之前区块的哈希值）</span>
+<span class="token keyword">class</span> <span class="token class-name">Block</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">,</span> previousHash<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+        self<span class="token punctuation">.</span>previousHash <span class="token operator">=</span> previousHash
+        self<span class="token punctuation">.</span>hash <span class="token operator">=</span> self<span class="token punctuation">.</span>ComputeHash
+
+    @property
+    <span class="token keyword">def</span> <span class="token function">ComputeHash</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> str<span class="token punctuation">(</span>sha256<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token operator">+</span>self<span class="token punctuation">.</span>previousHash<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">showBlock</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'data'</span><span class="token punctuation">:</span>self<span class="token punctuation">.</span>data<span class="token punctuation">,</span> <span class="token string">'previousHash'</span><span class="token punctuation">:</span> self<span class="token punctuation">.</span>previousHash<span class="token punctuation">,</span> <span class="token string">'hash'</span><span class="token punctuation">:</span> self<span class="token punctuation">.</span>hash<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+block <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账十元'</span><span class="token punctuation">,</span><span class="token string">'123'</span><span class="token punctuation">)</span>
+block<span class="token punctuation">.</span>showBlock<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>如上图所示，定义了区块Block类用来储存三个数据，调用常用的sha256（secret hash algorithm）函数对账本数据和前区块的哈希值进行计算，定义了showBlock方法对区块内容进行输出。输出结果如下图：<br>    {‘data’: ‘转账十元’, ‘previousHash’: ‘123’, ‘hash’: ‘bbb52b503ca642e6c48f02ab793b2beaca4a5c5ce7e93531038ed65799f70010’}</p>
+<p>接下来是创建区块的链，定义链Chain类，并且要先定义一个祖先区块：<br>如下图</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#区块的 链</span>
+<span class="token comment" spellcheck="true">#生成祖先区块</span>
+<span class="token keyword">class</span> <span class="token class-name">Chain</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>chain <span class="token operator">=</span> <span class="token punctuation">[</span>self<span class="token punctuation">.</span>ancestorBlock<span class="token punctuation">]</span>
+
+    @property
+    <span class="token keyword">def</span> <span class="token function">ancestorBlock</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        ancestor_block <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'祖先区块'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ancestor_block
+
+    <span class="token keyword">def</span> <span class="token function">showChain</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">:</span>
+            i<span class="token punctuation">.</span>showBlock<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+chain <span class="token operator">=</span> Chain<span class="token punctuation">(</span><span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>输出结果如下：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}</p>
+<p>更进一步，定义添加区块的函数：</p>
+<pre class=" language-python"><code class="language-python">    @property
+    <span class="token keyword">def</span> <span class="token function">getLatestBlock</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span>len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>chain<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span>
+
+    <span class="token comment" spellcheck="true">#添加区块到区块链上</span>
+    <span class="token comment" spellcheck="true">#要找到最近一个block的hash              </span>
+    <span class="token comment" spellcheck="true">#这个hash就是新区块的previousHash</span>
+
+    <span class="token keyword">def</span> <span class="token function">addBlockToChain</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> newBlock<span class="token punctuation">)</span><span class="token punctuation">:</span>                    
+        newBlock<span class="token punctuation">.</span>previousHash <span class="token operator">=</span> self<span class="token punctuation">.</span>getLatestBlock<span class="token punctuation">.</span>hash
+        newBlock<span class="token punctuation">.</span>hash <span class="token operator">=</span> newBlock<span class="token punctuation">.</span>ComputeHash
+        self<span class="token punctuation">.</span>chain<span class="token punctuation">.</span>append<span class="token punctuation">(</span>newBlock<span class="token punctuation">)</span>
+
+chain <span class="token operator">=</span> Chain<span class="token punctuation">(</span><span class="token punctuation">)</span>
+block1 <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账十元'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>addBlockToChain<span class="token punctuation">(</span>block1<span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>输出结果：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}<br>    {‘data’: ‘转账十元’, ‘previousHash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’, ‘hash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’}</p>
+<p>然后我们就可以无限地添加区块了，但是还要有一个函数用来验证当前的区块链是否合法，我们通过验证区块的previousHash是否等于previous区块的hash来判断（顺便判断一下数据有没有被篡改）：</p>
+<pre class=" language-python"><code class="language-python">    <span class="token comment" spellcheck="true">#验证当前的这个区块链是否合法</span>
+    <span class="token comment" spellcheck="true">#当前的数据有没有被篡改</span>
+    <span class="token comment" spellcheck="true">#我们要验证区块的previousHash是否等于previous区块的hash</span>
+    <span class="token keyword">def</span> <span class="token function">validateChain</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>chain<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>hash <span class="token operator">!=</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ComputeHash<span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token boolean">False</span>
+            <span class="token keyword">return</span> <span class="token boolean">True</span>
+
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>chain<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            blockToValidate <span class="token operator">=</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>blockToValidate<span class="token punctuation">.</span>hash<span class="token punctuation">)</span> <span class="token operator">!=</span> blockToValidate<span class="token punctuation">.</span>ComputeHash<span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'数据被篡改'</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> <span class="token boolean">False</span>
+            previousBlock <span class="token operator">=</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span>
+            <span class="token keyword">if</span> blockToValidate<span class="token punctuation">.</span>previousHash <span class="token operator">!=</span> previousBlock<span class="token punctuation">.</span>hash<span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'前后区块链接断裂'</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> <span class="token boolean">False</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span></code></pre>
+<p>如下图，验证函数功能：</p>
+<pre class=" language-python"><code class="language-python">chain <span class="token operator">=</span> Chain<span class="token punctuation">(</span><span class="token punctuation">)</span>
+block1 <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账十元'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span>
+block2 <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账二十元'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>addBlockToChain<span class="token punctuation">(</span>block1<span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>addBlockToChain<span class="token punctuation">(</span>block2<span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>chain<span class="token punctuation">.</span>validateChain<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>输出结果：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}<br>    {‘data’: ‘转账十元’, ‘previousHash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’, ‘hash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’}<br>    {‘data’: ‘转账二十元’, ‘previousHash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’, ‘hash’: ‘355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383’}<br>    True</p>
+<p>接下来尝试篡改区块链：</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 尝试篡改区块</span>
+chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token string">'转账500'</span> 
+chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>chain<span class="token punctuation">.</span>validateChain<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>输出结果：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}<br>    {‘data’: ‘转账500’, ‘previousHash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’, ‘hash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’}<br>    {‘data’: ‘转账二十元’, ‘previousHash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’, ‘hash’: ‘355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383’}<br>    数据被篡改<br>    False</p>
+<p>如果修正了哈希值呢？</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 尝试修正hash</span>
+chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>hash <span class="token operator">=</span> chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ComputeHash</code></pre>
+<p>输出结果：<br>    {‘data’: ‘祖先区块’, ‘previousHash’: ‘’, ‘hash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’}<br>    {‘data’: ‘转账500’, ‘previousHash’: ‘4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615’, ‘hash’: ‘5a37b0e17c9f44a7f3676cdf137e1ae80d62d4bbc12505e62a8c2cde64a30644’}<br>    {‘data’: ‘转账二十元’, ‘previousHash’: ‘c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46’, ‘hash’: ‘355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383’}<br>    前后区块链接断裂<br>    False</p>
+<p>综上所述，区块链确实拥有几乎不可篡改的特性。<br>以上就是一个最简易的python实现的“概念证明”的区块链程序。该程序当然还有许多的缺陷，如未加入工作量证明等区块链的机制，随着我对区块链技术了解的深入，我会进行迭代的更新，尽量去完善自己的这样一条区块链。</p>
 
             </div>
             <hr/>
@@ -504,7 +603,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://runxunwu.github.io/2020/05/27/hello-world/">http://runxunwu.github.io/2020/05/27/hello-world/</a>
+                    <a href="http://runxunwu.github.io/2020/07/05/qu-kuai-lian-gai-nian-zheng-ming/">http://runxunwu.github.io/2020/07/05/qu-kuai-lian-gai-nian-zheng-ming/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -710,7 +809,7 @@
         repo: 'RunxunWu.github.io',
         owner: 'RunxunWu',
         admin: ["RunxunWu"],
-        id: '2020-05-27T20-59-40',
+        id: '2020-07-05T08-42-30',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -734,69 +833,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/27/my-first-blog-post/">
+                <a href="/2020/07/05/qu-kuai-lian-gai-nian-zheng-ming/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="My first blog post">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="区块链概念证明">
                         
-                        <span class="card-title">My first blog post</span>
+                        <span class="card-title">区块链概念证明</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Chapter1content
-
-Chapter2content
-
-参考文献
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-27
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Runxun Wu
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/05/27/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            区块链，顾名思义是一个个的区块组成的链条。每一个区块存储了三个数据，分别是账本数据、前一个区块的哈希值和自己的哈希值，哈希值相当于区块的指纹。而自己的哈希值由哈希函数对账本数据和前一个区块的哈希值进行计算得出。由此也可以看出，如果想要篡改账
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-05
                             </span>
                         <span class="publish-author">
                             
@@ -807,6 +866,46 @@ Chapter2content
                     </div>
                 </div>
 
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/05/28/c-yu-yan-mi-gong-xiao-you-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="C语言迷宫小游戏">
+                        
+                        <span class="card-title">C语言迷宫小游戏</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            C语言迷宫小游戏
+该文档示例一个完整的C语言小游戏“走迷宫”（编译器里运行即可）
+你将可以通过键盘上的“W”，“S”，“A”，“D”4个按键来控制1个小球向上，下，左，右4个方向移动，目的是让小球从起点走到终点走出迷宫。完整代码如下：
+#i
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Runxun Wu
+                            
+                        </span>
+                    </div>
+                </div>
                 
             </div>
         </div>
