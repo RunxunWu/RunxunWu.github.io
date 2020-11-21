@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="区块链概念证明, Runxun Wu の blog">
+    <meta name="keywords" content="Linux入门, Runxun Wu の blog">
     <meta name="description" content="欢迎光临吴润迅の博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>区块链概念证明 | Runxun Wu の blog</title>
+    <title>Linux入门 | Runxun Wu の blog</title>
     <link rel="icon" type="image/png" href="/RunxunWu.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/RunxunWu.github.io/libs/awesome/css/all.css">
@@ -307,12 +307,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/RunxunWu.github.io/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/RunxunWu.github.io/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">区块链概念证明</h1>
+                    <h1 class="description center-align post-title">Linux入门</h1>
                 </div>
             </div>
         </div>
@@ -449,7 +449,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-07-05
+                    2020-11-21
                 </div>
                 
 
@@ -458,7 +458,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    3.5k
                 </div>
                 
 
@@ -470,126 +470,255 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>区块链，顾名思义是一个个的区块组成的链条。每一个区块存储了三个数据，分别是账本数据、前一个区块的哈希值和自己的哈希值，哈希值相当于区块的指纹。而自己的哈希值由哈希函数对账本数据和前一个区块的哈希值进行计算得出。由此也可以看出，如果想要篡改账本数据，也会对该区块的哈希值作修改，前一个区块的哈希值修改后又会影响下一个区块的哈希值。所以要想更改一个区块的数据需要对该区块之后的一整条区块链进行修改。这使得想要修改数据成为了一件成本巨大，几乎不可能做到的事情。<br>下面使用python语言进行编程实现，对以上概念做实例证明：</p>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#区块链概念证明</span>
+                <h1 id="Linux入门"><a href="#Linux入门" class="headerlink" title="Linux入门"></a>Linux入门</h1><p>主要内容：</p>
+<pre><code>• Linux简介
 
-<span class="token keyword">import</span> hashlib          <span class="token comment" spellcheck="true">#引入哈希模块</span>
+• Shell简介
 
-<span class="token keyword">def</span> <span class="token function">sha256</span><span class="token punctuation">(</span>dataNeedSha<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    sha256 <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    sha256<span class="token punctuation">.</span>update<span class="token punctuation">(</span>dataNeedSha<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> sha256<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment" spellcheck="true"># 区块</span>
-<span class="token comment" spellcheck="true">#储存data</span>
-<span class="token comment" spellcheck="true">#之前区块的哈希值</span>
-<span class="token comment" spellcheck="true">#自己的哈希值: 由存储在区块里的信息计算出来的（data+之前区块的哈希值）</span>
-<span class="token keyword">class</span> <span class="token class-name">Block</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">,</span> previousHash<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>data <span class="token operator">=</span> data
-        self<span class="token punctuation">.</span>previousHash <span class="token operator">=</span> previousHash
-        self<span class="token punctuation">.</span>hash <span class="token operator">=</span> self<span class="token punctuation">.</span>ComputeHash
-
-    @property
-    <span class="token keyword">def</span> <span class="token function">ComputeHash</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> str<span class="token punctuation">(</span>sha256<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token operator">+</span>self<span class="token punctuation">.</span>previousHash<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">showBlock</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'data'</span><span class="token punctuation">:</span>self<span class="token punctuation">.</span>data<span class="token punctuation">,</span> <span class="token string">'previousHash'</span><span class="token punctuation">:</span> self<span class="token punctuation">.</span>previousHash<span class="token punctuation">,</span> <span class="token string">'hash'</span><span class="token punctuation">:</span> self<span class="token punctuation">.</span>hash<span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-block <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账十元'</span><span class="token punctuation">,</span><span class="token string">'123'</span><span class="token punctuation">)</span>
-block<span class="token punctuation">.</span>showBlock<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>如上图所示，定义了区块Block类用来储存三个数据，调用常用的sha256（secret hash algorithm）函数对账本数据和前区块的哈希值进行计算，定义了showBlock方法对区块内容进行输出。输出结果如下图：</p>
-<pre><code>{&#39;data&#39;: &#39;转账十元&#39;, &#39;previousHash&#39;: &#39;123&#39;, &#39;hash&#39;: &#39;bbb52b503ca642e6c48f02ab793b2beaca4a5c5ce7e93531038ed65799f70010&#39;}</code></pre><p>接下来是创建区块的链，定义链Chain类，并且要先定义一个祖先区块：<br>如下图</p>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#区块的 链</span>
-<span class="token comment" spellcheck="true">#生成祖先区块</span>
-<span class="token keyword">class</span> <span class="token class-name">Chain</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>chain <span class="token operator">=</span> <span class="token punctuation">[</span>self<span class="token punctuation">.</span>ancestorBlock<span class="token punctuation">]</span>
-
-    @property
-    <span class="token keyword">def</span> <span class="token function">ancestorBlock</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        ancestor_block <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'祖先区块'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> ancestor_block
-
-    <span class="token keyword">def</span> <span class="token function">showChain</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">:</span>
-            i<span class="token punctuation">.</span>showBlock<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-chain <span class="token operator">=</span> Chain<span class="token punctuation">(</span><span class="token punctuation">)</span>
-chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>输出结果如下：</p>
-<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}</code></pre><p>更进一步，定义添加区块的函数：</p>
-<pre class=" language-python"><code class="language-python">    @property
-    <span class="token keyword">def</span> <span class="token function">getLatestBlock</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span>len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>chain<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span>
-
-    <span class="token comment" spellcheck="true">#添加区块到区块链上</span>
-    <span class="token comment" spellcheck="true">#要找到最近一个block的hash              </span>
-    <span class="token comment" spellcheck="true">#这个hash就是新区块的previousHash</span>
-
-    <span class="token keyword">def</span> <span class="token function">addBlockToChain</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> newBlock<span class="token punctuation">)</span><span class="token punctuation">:</span>                    
-        newBlock<span class="token punctuation">.</span>previousHash <span class="token operator">=</span> self<span class="token punctuation">.</span>getLatestBlock<span class="token punctuation">.</span>hash
-        newBlock<span class="token punctuation">.</span>hash <span class="token operator">=</span> newBlock<span class="token punctuation">.</span>ComputeHash
-        self<span class="token punctuation">.</span>chain<span class="token punctuation">.</span>append<span class="token punctuation">(</span>newBlock<span class="token punctuation">)</span>
-
-chain <span class="token operator">=</span> Chain<span class="token punctuation">(</span><span class="token punctuation">)</span>
-block1 <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账十元'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span>
-chain<span class="token punctuation">.</span>addBlockToChain<span class="token punctuation">(</span>block1<span class="token punctuation">)</span>
-chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>输出结果：</p>
-<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}
-{&#39;data&#39;: &#39;转账十元&#39;, &#39;previousHash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;, &#39;hash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;}</code></pre><p>然后我们就可以无限地添加区块了，但是还要有一个函数用来验证当前的区块链是否合法，我们通过验证区块的previousHash是否等于previous区块的hash来判断（顺便判断一下数据有没有被篡改）：</p>
-<pre class=" language-python"><code class="language-python">    <span class="token comment" spellcheck="true">#验证当前的这个区块链是否合法</span>
-    <span class="token comment" spellcheck="true">#当前的数据有没有被篡改</span>
-    <span class="token comment" spellcheck="true">#我们要验证区块的previousHash是否等于previous区块的hash</span>
-    <span class="token keyword">def</span> <span class="token function">validateChain</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>chain<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>hash <span class="token operator">!=</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ComputeHash<span class="token punctuation">:</span>
-                <span class="token keyword">return</span> <span class="token boolean">False</span>
-            <span class="token keyword">return</span> <span class="token boolean">True</span>
-
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>chain<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            blockToValidate <span class="token operator">=</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>blockToValidate<span class="token punctuation">.</span>hash<span class="token punctuation">)</span> <span class="token operator">!=</span> blockToValidate<span class="token punctuation">.</span>ComputeHash<span class="token punctuation">:</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'数据被篡改'</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token boolean">False</span>
-            previousBlock <span class="token operator">=</span> self<span class="token punctuation">.</span>chain<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span>
-            <span class="token keyword">if</span> blockToValidate<span class="token punctuation">.</span>previousHash <span class="token operator">!=</span> previousBlock<span class="token punctuation">.</span>hash<span class="token punctuation">:</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'前后区块链接断裂'</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token boolean">False</span>
-        <span class="token keyword">return</span> <span class="token boolean">True</span></code></pre>
-<p>如下图，验证函数功能：</p>
-<pre class=" language-python"><code class="language-python">chain <span class="token operator">=</span> Chain<span class="token punctuation">(</span><span class="token punctuation">)</span>
-block1 <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账十元'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span>
-block2 <span class="token operator">=</span> Block<span class="token punctuation">(</span><span class="token string">'转账二十元'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span>
-chain<span class="token punctuation">.</span>addBlockToChain<span class="token punctuation">(</span>block1<span class="token punctuation">)</span>
-chain<span class="token punctuation">.</span>addBlockToChain<span class="token punctuation">(</span>block2<span class="token punctuation">)</span>
-chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>chain<span class="token punctuation">.</span>validateChain<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
-<p>输出结果：</p>
-<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}
-{&#39;data&#39;: &#39;转账十元&#39;, &#39;previousHash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;, &#39;hash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;}
-{&#39;data&#39;: &#39;转账二十元&#39;, &#39;previousHash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;, &#39;hash&#39;: &#39;355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383&#39;}
-True</code></pre><p>接下来尝试篡改区块链：</p>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 尝试篡改区块</span>
-chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token string">'转账500'</span> 
-chain<span class="token punctuation">.</span>showChain<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>chain<span class="token punctuation">.</span>validateChain<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
-<p>输出结果：</p>
-<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}
-{&#39;data&#39;: &#39;转账500&#39;, &#39;previousHash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;, &#39;hash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;}
-{&#39;data&#39;: &#39;转账二十元&#39;, &#39;previousHash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;, &#39;hash&#39;: &#39;355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383&#39;}
-数据被篡改
-False</code></pre><p>如果修正了哈希值呢？</p>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 尝试修正hash</span>
-chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>hash <span class="token operator">=</span> chain<span class="token punctuation">.</span>chain<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ComputeHash</code></pre>
-<p>输出结果：</p>
-<pre><code>{&#39;data&#39;: &#39;祖先区块&#39;, &#39;previousHash&#39;: &#39;&#39;, &#39;hash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;}
-{&#39;data&#39;: &#39;转账500&#39;, &#39;previousHash&#39;: &#39;4fed52ab5fe830c2e29def3b0de30430b43feb9583e6b9446e6cb1782e363615&#39;, &#39;hash&#39;: &#39;5a37b0e17c9f44a7f3676cdf137e1ae80d62d4bbc12505e62a8c2cde64a30644&#39;}
-{&#39;data&#39;: &#39;转账二十元&#39;, &#39;previousHash&#39;: &#39;c3fb4512257f093caf4d78b610cbba0b330cc883105fbd9509bbaa6086bf5a46&#39;, &#39;hash&#39;: &#39;355aa11242a742f32cf91b8b3cc9d8aa8f909b0da689ac4dfb95ccd5bd695383&#39;}
-前后区块链接断裂
-False</code></pre><p>综上所述，区块链确实拥有几乎不可篡改的特性。<br>以上就是一个最简易的python实现的“概念证明”的区块链程序。该程序当然还有许多的缺陷，如未加入工作量证明等区块链的机制，随着我对区块链技术了解的深入，我会进行迭代的更新，尽量去完善自己的这样一条区块链。</p>
+• Linux下常用Shell命令</code></pre><h2 id="Linux简介"><a href="#Linux简介" class="headerlink" title="Linux简介"></a>Linux简介</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>• 一个开源、免费、自由的类Unix操作系统，便于搭建编程环境</p>
+<blockquote>
+<p>操作系统:</p>
+<p>   （1）PC：win, mac, linux（服务器上使用最多）</p>
+<p>   （2）Mobile：Android, IOS</p>
+<p>   （3）总结Linux与Unix的关系/区别：Linux 是一个类似 Unix 的操作系统，Unix 要早于 Linux，Linux 的初衷就是要替代 UNIX，并在功能和用户体验上进行优化，所以 Linux 模仿了 UNIX（但并没有抄袭 UNIX 的源码），使得 Linux 在外观和交互上与 UNIX 非常类似。</p>
+</blockquote>
+<p>• 广泛应用于服务器</p>
+<h3 id="发行版"><a href="#发行版" class="headerlink" title="发行版"></a>发行版</h3><p>严格来讲，Linux仅仅指的是操作系统内核，但如今Linux常用来指基于Linux的完整操作系统，内核则用“Linux内核”来特指。某些组织或厂商将Linux内核和其他各种软件包装起来，并提供系统安装界⾯和系统配置、设定与管理⼯具，就构成了 Linux 的发⾏版本。</p>
+<blockquote>
+<p>• 发行版为许多不同的目的而制作，包含Linux内核以及其他各种系统工具、应用软件</p>
+<p>• 主流发行版：Ubuntu, Debian, Fedora, CentOS, openSUSE等</p>
+</blockquote>
+<h3 id="在普通Windows-PC下搭建Linux环境"><a href="#在普通Windows-PC下搭建Linux环境" class="headerlink" title="在普通Windows PC下搭建Linux环境"></a>在普通Windows PC下搭建Linux环境</h3><p>• WSL —— 教程见MSTC公众号推送 <a href="https://mp.weixin.qq.com/s/arbfp8_TQejQxYRMwcjAxw" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/arbfp8_TQejQxYRMwcjAxw</a></p>
+<p>• 虚拟机 —— 参考教程 <a href="https://www.pianshen.com/article/74081929360/" target="_blank" rel="noopener">https://www.pianshen.com/article/74081929360/</a></p>
+<p>以上两种方法中，WSL配置较为简单，但没有图形化界面；配置虚拟机过程比较复杂，但是有图形界面，使用起来对新手比较友好。</p>
+<hr>
+<h2 id="Shell简介"><a href="#Shell简介" class="headerlink" title="Shell简介"></a>Shell简介</h2><h3 id="两种交互方式"><a href="#两种交互方式" class="headerlink" title="两种交互方式"></a>两种交互方式</h3><blockquote>
+<p>• GUI:即图形用户界面，Windows下绝大部分软件都使用GUI，易于用户接受和使用。</p>
+<p>• CLI:即命令行用户界面，通常不支持鼠标，需要使用键盘输入指令，优点在于占用资源少，可用脚本实现自动化运行。</p>
+</blockquote>
+<h3 id="终端"><a href="#终端" class="headerlink" title="终端"></a>终端</h3><p>终端是⼀种⽤来让⽤户输⼊数据⾄计算机，并且显示计算结果的机器。历史上的终端是实体硬件，但是随着计算机的进化，我们现在使用一<br>个程序来模拟传统终端的行为，也就是终端模拟器。终端实现的是用户的Shell之间的交互。</p>
+<h3 id="Shell的作用"><a href="#Shell的作用" class="headerlink" title="Shell的作用"></a>Shell的作用</h3><p>Shell通常指系统内核和用户交互的层面，它是一个命令解释器，能够接收用户输入的命令，进行处理后再返回结果。</p>
+<p>不同系统中常用Shell:</p>
+<p>• Windows: cmd, Powershell…</p>
+<p>• Linux: sh, bash, zsh, fish…</p>
+<hr>
+<h2 id="Shell使用方法及Linux下常用命令"><a href="#Shell使用方法及Linux下常用命令" class="headerlink" title="Shell使用方法及Linux下常用命令"></a>Shell使用方法及Linux下常用命令</h2><h3 id="熟悉Shell"><a href="#熟悉Shell" class="headerlink" title="熟悉Shell"></a>熟悉Shell</h3><p>打开终端后，我们能看到如下所示的提示：</p>
+<pre><code>runxunwu@runxunwu-VirtualBox:~$</code></pre><p>其中，@前的“runxunwu”是我当前的用户名，@之后的“runxunwu-VirtualBox”是我的主机名;</p>
+<p>~是一个环境变量，代表当前用户的主目录，例如我的是“/home/runxunwu”，这个地方代表的是当前的工作目录，也就是说现在我我的工作目录是“/home/runxunwu”。这里补充一个基础知识，Windows下的文件路径是类似“C:\Windows\System32\”这种格式的，从盘符开始，用反斜杠来分隔多级目录。但是在Linux下不同，Linux文件系统是一个目录树，没有Windows中盘符的概念，顶级入口是根目录“/”，向下呈现分支状。</p>
+<p>要注意，Linux分隔多级目录使用的是正斜杠。</p>
+<p>我们可以向Shell中输入简单的命令，例如date和echo，观察效果。</p>
+<p>例如:</p>
+<pre><code>runxunwu@runxunwu-VirtualBox:~$ date
+2020年 11月 21日 星期六 22:55:48 CST
+runxunwu@runxunwu-virtualBox:~$ echo &#39;hello world&#39;
+hello world</code></pre><h3 id="常用文件命令"><a href="#常用文件命令" class="headerlink" title="常用文件命令"></a>常用文件命令</h3><p>• cd —— 改变工作目录</p>
+<p>例如：</p>
+<pre><code>cd /home/runxunwu/桌面</code></pre><p>代表切换工作目录到“/home/runxunwu/桌面”。</p>
+<p>在Linux中，.代表当前目录，..代表上一级目录，~代表主目录。</p>
+<p>例如：</p>
+<pre><code>cd ..
+cd ~</code></pre><p>分别能够返回上一级目录和切换到当前用户主目录。</p>
+<p>• pwd —— 显示当前路径</p>
+<p>• ls —— 显示当前目录中的文件</p>
+<p>可加参数 -l -a -h等等， 连续使用时可以直接用 -lah。</p>
+<p>在linux中，许多命令都可以附加参数，实现特定功能。具体的使用方法可以使用man命令查询。</p>
+<p>-l：显示详细信息</p>
+<p>-a： 显示隐藏文件</p>
+<p>-h： 换算KB，MB，GB等单位</p>
+<p>例如：</p>
+<pre><code>runxunwu@runxunwu-VirtualBox:~$ ls -lah
+总用量 92K
+drwxr-xr-x 18 runxunwu runxunwu 4.0K 11月 21 23:52 .
+drwxr-xr-x  3 root     root     4.0K 11月 21 18:09 ..
+drwxr-xr-x  2 runxunwu runxunwu 4.0K 11月 21 18:40 公共的
+drwxr-xr-x  2 runxunwu runxunwu 4.0K 11月 21 18:40 模板
+drwxr-xr-x  2 runxunwu runxunwu 4.0K 11月 21 18:40 视频
+drwxr-xr-x  2 runxunwu runxunwu 4.0K 11月 21 18:40 图片
+drwxr-xr-x  3 runxunwu runxunwu 4.0K 11月 21 23:52 文档
+drwxr-xr-x  2 runxunwu runxunwu 4.0K 11月 21 18:40 下载
+drwxr-xr-x  2 runxunwu runxunwu 4.0K 11月 21 18:40 音乐
+drwxr-xr-x  2 runxunwu runxunwu 4.0K 11月 21 20:09 桌面
+-rw-------  1 runxunwu runxunwu  720 11月 21 23:51 .bash_history
+-rw-r--r--  1 runxunwu runxunwu  220 11月 21 18:09 .bash_logout
+-rw-r--r--  1 runxunwu runxunwu 3.7K 11月 21 18:09 .bashrc
+drwx------ 14 runxunwu runxunwu 4.0K 11月 21 23:51 .cache
+drwx------ 13 runxunwu runxunwu 4.0K 11月 21 23:52 .config
+drwxrwxr-x  5 runxunwu runxunwu 4.0K 11月 21 23:52 .deepinwine
+drwx------  3 runxunwu runxunwu 4.0K 11月 21 23:52 .gnupg
+drwxr-xr-x  3 runxunwu runxunwu 4.0K 11月 21 18:40 .local
+drwx------  5 runxunwu runxunwu 4.0K 11月 21 20:58 .mozilla
+-rw-r--r--  1 runxunwu runxunwu  807 11月 21 18:09 .profile
+drwxr-xr-x  3 runxunwu runxunwu 4.0K 11月 21 23:44 snap
+drwx------  2 runxunwu runxunwu 4.0K 11月 21 23:52 .ssh
+-rw-r--r--  1 runxunwu runxunwu    0 11月 21 20:35 .sudo_as_admin_successful
+-rw-rw-r--  1 runxunwu runxunwu  174 11月 21 23:30 .wget-hsts</code></pre><p>• man —— 查询命令说明文档</p>
+<p>如果遇到陌生的命令，可以使用man来查询使用说明。</p>
+<p>具体用法：</p>
+<pre><code>man 要查询的命令</code></pre><p>例如:</p>
+<pre><code>runxunwu@runxunwu-VirtualBox:~$ man ls
+LS(1) User Commands LS(1)
+NAME
+ls - list directory contents
+SYNOPSIS
+ls [OPTION]... [FILE]...
+DESCRIPTION
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+Mandatory arguments to long options are mandatory for short options
+too.
+-a, --all
+do not ignore entries starting with .
+-A, --almost-all
+do not list implied . and ..
+--author</code></pre><p>• mkdir —— 新建文件夹</p>
+<p>用法：mkdir 文件夹名</p>
+<p>例如：</p>
+<pre><code>mkdir newfolder</code></pre><p>• rmdir —— 删除文件夹</p>
+<p>用法：rmdir 文件夹名</p>
+<p>例如：</p>
+<pre><code>rmdir newfolder</code></pre><p>• touch —— 新建文件</p>
+<p>用法：touch 文件名</p>
+<p>例如：</p>
+<pre><code>touch a.txt</code></pre><p>• mv —— 移动文件，也可实现重命名</p>
+<p>用法：mv 源文件名 目标文件名(含路径)</p>
+<p>例如：</p>
+<pre><code>mv a.txt /home/runxunwu/a.txt</code></pre><p>• cp —— 复制文件</p>
+<p>用法：cp 源文件名 目标文件名</p>
+<p>例如：</p>
+<pre><code>cp a.txt b.txt</code></pre><p>• rm —— 删除文件</p>
+<p>用法：rm 文件名</p>
+<p>例如：</p>
+<pre><code>rm a.txt</code></pre><p>rm命令还可以搭配通配符使用，如</p>
+<pre><code>rm *.txt</code></pre><p>这个命令可以删除当前目录下所有名称以.txt结尾的文件。</p>
+<p>不仅rm如此，Linux下许多命令都支持这种操作。如果搭配正则表达式还能够实现更强大的功能。</p>
+<p>• ssh —— 远程登录服务器</p>
+<p>SSH是Secure Shell的缩写，是一种较为可靠，专为远程登录会话和其他网络服务提供安全性的协议。</p>
+<p>很多情况下，我们的程序都部署在远程服务器上。要对远程服务器进行维护，我们往往需要通过SSH协议进行登录。</p>
+<p>用法：ssh [-p 端口号(如果是默认的22则可以省略)] 用户名@主机地址</p>
+<p>例如：</p>
+<pre><code>ssh runxunwu@127.0.0.1</code></pre><p>• tmux —— 保存进程</p>
+<p>命令⾏的典型使⽤⽅式是，打开⼀个终端窗⼝（terminal window，以下简称”窗⼝”），在⾥⾯输⼊命令。⽤户与计算机的这种临时的交互，称为⼀次”会话”（session） 。</p>
+<p>会话的⼀个重要特点是，窗⼝与其中启动的进程[连在⼀起的。打开窗⼝，会话开始；关闭窗⼝，会话结束，会话内部的进程也会随之终⽌，不管有没有运⾏完。</p>
+<p>⼀个典型的例⼦就是，SSH 登录远程计算机，打开⼀个远程窗⼝执⾏命令。这时，⽹络突然断线，再次登录的时候，是找不回上⼀次执⾏的命令的。因为上⼀次 SSH 会话已经终⽌了，⾥⾯的进程也随之消失了。</p>
+<p>为了解决这个问题，会话与窗⼝可以”解绑”：窗⼝关闭时，会话并不终⽌，⽽是继续运⾏，等到以后需要的时候，再让会话”绑定”其他窗⼝。</p>
+<p>如果需要在服务器上持续地运行程序，建议使⽤ Tmux 持久化你的程序。</p>
+<p>◦ 新建会话</p>
+<p>要新建一个会话，只需要输入tmux命令即可：</p>
+<pre><code>tmux</code></pre><p>◦ 离开会话</p>
+<p>有时候我们需要离开当前会话，操作其他的任务，但是又想该会话继续在后台执行，这时候我们可以输入如下命令：</p>
+<pre><code>tmux detach</code></pre><p>◦ 查看会话列表</p>
+<p>有时候我们可能同时操作了好几个会话， 我们可以通过如下的命令来查看我们目前操作了几个会话：</p>
+<pre><code>tmux ls</code></pre><p>◦ 进入会话</p>
+<p>离开会话之后，有时候我们还需要对某个会话进行操作，这时候可以通过如下的操作：</p>
+<pre><code>tmux attach -t &lt;session-name&gt;</code></pre><p>◦ 关闭 session</p>
+<p>如果需要关闭 session, 可以通过执行如下的命令即可：</p>
+<pre><code>tmux kill-session -t &lt;session-name&gt;</code></pre><h3 id="安装软件和更换源"><a href="#安装软件和更换源" class="headerlink" title="安装软件和更换源"></a>安装软件和更换源</h3><p>• sudo —— 以root用户权限执行命令</p>
+<p>由于安装软件和更改系统配置文件都需要较高的权限，所以我们需要用到sudo这个命令。sudo的作用是以root用户的身份执行命令。</p>
+<p>我们可以尝试直接运行apt install tmux这个命令（安装tmux）</p>
+<pre><code>runxunwu@runxunwu-VirtualBox:~$ apt install python
+E: 无法打开锁文件 /var/lib/dpkg/lock-frontend - open (13: 权限不够)
+E: 无法获取 dpkg 前端锁 (/var/lib/dpkg/lock-frontend)，请查看您是否正以 root 用户运行？</code></pre><p>在前面加上sudo之后，我们就可以安装软件了。</p>
+<pre><code>sudo apt install tmux</code></pre><p>• apt —— 包管理器</p>
+<p>包管理器的概念类似于应用商店。它提供各种编译好的软件包，供用户下载。</p>
+<p>不同Linux发行版使用的包管理器也不同，但是使用方法大同小异。授课使用的Ubuntu采用apt。</p>
+<p>◦ 安装程序</p>
+<pre><code>sudo apt install tmux</code></pre><p>◦ 卸载程序</p>
+<pre><code>sudo apt remove tmux</code></pre><p>• 更换源</p>
+<p>由于apt默认的服务器在国外，所以我们下载软件的速度会很慢。国内的不少大学、公司都架设了镜像服务器，我们将源更换为国内的可以加快下载速度。</p>
+<p>清华源：<a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener">https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/</a></p>
+<p>配置文件在/etc/apt/sources.list，使用vim进行修改，执行下列命令</p>
+<pre><code>cd /etc/apt
+sudo mv sources.list sources.list.bak
+sudo vim sources.list</code></pre><p>在vim编辑器中，按i键进入编辑模式，然后将清华源复制进编辑器，按esc键退出编辑模式，再输入</p>
+<pre><code>:wq</code></pre><p>保存文件并退出。</p>
+<p>更换为国内源后需要刷新apt，命令为</p>
+<pre><code>sudo apt update</code></pre><p>现在再去安装一个软件，能看到服务器地址以及变成了清华的镜像服务器，下载速度也提升了不少。</p>
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>各种操作系统中都有文件权限的概念，只不过Windows下的权限管理相对宽松，所以我们几乎感觉不到它的存在。但是Linux下对权限的要求比较严格，所以初学者需要对这个概念有一定的了解。</p>
+<p>Linux 是多⽤户多任务操作系统，也就是说，Linux系统⽀持多个⽤户在同⼀时间内登陆，不同⽤户可以执⾏不同的任务，并且互不影响。将⽤户分组是 Linux 系统中对⽤户进⾏管理及控制访问权限的⼀种⼿段，通过定义⽤户组，简化了对⽤户的管理⼯作。</p>
+<p>在Shell中，我们执行</p>
+<pre><code>ls -l</code></pre><p>这条命令后，能看到如下结果：</p>
+<pre><code>drwxr-xr-x 2 runxunwu runxunwu 4096 11月 21 18:40 公共的
+drwxr-xr-x 2 runxunwu runxunwu 4096 11月 21 18:40 模板
+drwxr-xr-x 2 runxunwu runxunwu 4096 11月 21 18:40 视频
+drwxr-xr-x 2 runxunwu runxunwu 4096 11月 21 18:40 图片
+drwxr-xr-x 3 runxunwu runxunwu 4096 11月 21 23:52 文档
+drwxr-xr-x 2 runxunwu runxunwu 4096 11月 21 18:40 下载
+drwxr-xr-x 2 runxunwu runxunwu 4096 11月 21 18:40 音乐
+drwxr-xr-x 2 runxunwu runxunwu 4096 11月 21 20:09 桌面
+-rw-rw-r-- 1 runxunwu runxunwu    0 11月 22 00:13 a.txt
+drwxr-xr-x 3 runxunwu runxunwu 4096 11月 21 23:44 snap</code></pre><p>这两行中，最右边的是文件或目录名，最左边的位置就是它所对应的权限。</p>
+<p>第一位，如果是d,则代表是目录（即文件夹） ，如果是-，代表是一个文件。</p>
+<p>之后是9位权限代码，r即read，代表读取权限，w即write，代表写入权限，x即execute，代表执行权限。rwx顺序不能改变，如果对应位置是-，代表无此权限。</p>
+<p>对于权限代码，我们应当每3位分为一组去看。如第一行的“rwxrwxrwx”，应看作“rwx/ rwx/ rwx”.</p>
+<p>第一组，代表的是所有者的权限，第二组是与所有者同组用户的权限，第三组是其他用户的权限。</p>
+<p>如果给一组里的3位权限代码赋予二进制权值，能得到以下对应关系：</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>权限</th>
+<th>rwx</th>
+<th>二进制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7</td>
+<td>读+写+执行</td>
+<td>rwx</td>
+<td>111</td>
+</tr>
+<tr>
+<td>6</td>
+<td>读+写</td>
+<td>rw-</td>
+<td>110</td>
+</tr>
+<tr>
+<td>5</td>
+<td>读+执行</td>
+<td>r-x</td>
+<td>101</td>
+</tr>
+<tr>
+<td>4</td>
+<td>只读</td>
+<td>r–</td>
+<td>100</td>
+</tr>
+<tr>
+<td>3</td>
+<td>写+执行</td>
+<td>-wx</td>
+<td>011</td>
+</tr>
+<tr>
+<td>2</td>
+<td>只写</td>
+<td>-w-</td>
+<td>010</td>
+</tr>
+<tr>
+<td>1</td>
+<td>只执行</td>
+<td>–x</td>
+<td>001</td>
+</tr>
+<tr>
+<td>0</td>
+<td>无</td>
+<td>—</td>
+<td>000</td>
+</tr>
+<tr>
+<td>要更改一个文件的权限，需要用到chmod命令。根据上述表格，我们可以用三个数字代表三类用户的权限。例如：</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<pre><code>chmod 755 a.sh</code></pre><p>代表设置a.sh的权限为rwxr-xr-x。chmod还有一种用法，例如：</p>
+<pre><code>chmod +x a.sh</code></pre><p>这个命令能够为所有用户赋予执行a.sh的权限。类似地，</p>
+<pre><code>chmod -x a.sh</code></pre><p>是取消所有用户执行a.sh的权限。</p>
 
             </div>
             <hr/>
@@ -615,7 +744,7 @@ False</code></pre><p>综上所述，区块链确实拥有几乎不可篡改的�
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://runxunwu.github.io/RunxunWu.github.io/2020/07/05/qu-kuai-lian-gai-nian-zheng-ming/">http://runxunwu.github.io/RunxunWu.github.io/2020/07/05/qu-kuai-lian-gai-nian-zheng-ming/</a>
+                    <a href="http://runxunwu.github.io/RunxunWu.github.io/2020/11/21/linux-ru-men/">http://runxunwu.github.io/RunxunWu.github.io/2020/11/21/linux-ru-men/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -821,7 +950,7 @@ False</code></pre><p>综上所述，区块链确实拥有几乎不可篡改的�
         repo: 'RunxunWu.github.io',
         owner: 'RunxunWu',
         admin: ["RunxunWu"],
-        id: '2020-07-05T08-42-30',
+        id: '2020-11-21T21-46-50',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -845,9 +974,10 @@ False</code></pre><p>综上所述，区块链确实拥有几乎不可篡改的�
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/RunxunWu.github.io/2020/11/21/linux-ru-men/">
                     <div class="card-image">
@@ -873,9 +1003,9 @@ False</code></pre><p>综上所述，区块链确实拥有几乎不可篡改的�
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -884,6 +1014,7 @@ False</code></pre><p>综上所述，区块链确实拥有几乎不可篡改的�
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -894,27 +1025,24 @@ False</code></pre><p>综上所述，区块链确实拥有几乎不可篡改的�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/RunxunWu.github.io/2020/05/28/c-yu-yan-mi-gong-xiao-you-xi/">
+                <a href="/RunxunWu.github.io/2020/07/05/qu-kuai-lian-gai-nian-zheng-ming/">
                     <div class="card-image">
                         
                         
-                        <img src="/RunxunWu.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="C语言迷宫小游戏">
+                        <img src="/RunxunWu.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="区块链概念证明">
                         
-                        <span class="card-title">C语言迷宫小游戏</span>
+                        <span class="card-title">区块链概念证明</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            C语言迷宫小游戏
-该文档示例一个完整的C语言小游戏“走迷宫”（编译器里运行即可）
-你将可以通过键盘上的“W”，“S”，“A”，“D”4个按键来控制1个小球向上，下，左，右4个方向移动，目的是让小球从起点走到终点走出迷宫。完整代码如下：
-#i
+                            区块链，顾名思义是一个个的区块组成的链条。每一个区块存储了三个数据，分别是账本数据、前一个区块的哈希值和自己的哈希值，哈希值相当于区块的指纹。而自己的哈希值由哈希函数对账本数据和前一个区块的哈希值进行计算得出。由此也可以看出，如果想要篡改账
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-05
                             </span>
                         <span class="publish-author">
                             
